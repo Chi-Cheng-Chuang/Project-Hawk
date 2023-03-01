@@ -31,7 +31,7 @@ c.beginPath();
 //c.lineTo(canvas.width, canvas.height / 2);
 //c.stroke();
 
-//drawing grid lines
+//**********drawing grid lines**********
 for (x = 0; x <= canvas.width; x += 30) 
 {
   for (y = 0; y <= canvas.height; y += 30) 
@@ -49,6 +49,7 @@ for (x = 0; x <= canvas.width; x += 30)
     c.stroke();
   }
 }
+//**********drawing grid lines**********
 
 powerBtn.addEventListener("click", () => {
   if (isPlaying) {
