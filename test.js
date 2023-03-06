@@ -102,8 +102,8 @@ const draw = () => {
   // Clear the canvas and draw a white grid
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
-  c.strokeStyle = "white";
-  const numLines = 10; // changing number of lines makes smaller squares
+  c.strokeStyle = "#414141";
+  const numLines = 50; // changing number of lines makes smaller squares
   const lineHeight = canvas.height / numLines;
   for (let i = 0; i < numLines; i++) 
   {
