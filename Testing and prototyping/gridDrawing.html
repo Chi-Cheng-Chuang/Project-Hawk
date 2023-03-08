@@ -1,0 +1,111 @@
+<html>
+<body>
+    <!--canvas id = "grid" width=610 height=610 style="border:1px solid #000000"></canvas-->
+    <canvas id = "canvas"></canvas>
+    
+    <script>
+        // var cnv = document.getElementById("grid"); //hold canvas with ID "grid"
+        // var ctx = cnv.getContext("2d");            //draw 2 dimensional graphics
+
+        // //small units
+        // for(var i = 5; i < 605; i = i+6) //staring at 5_px at the top, 
+        // {
+        //     //vertical lines
+        //     ctx.moveTo(i, 5);
+        //     ctx.lineTo(i, 605);
+
+        //     //horizontal lines
+        //     ctx.moveTo(5, i);
+        //     ctx.lineTo(605, i);
+
+        //     //line style
+        //     ctx.strokeStyle = "#b0b0b0";
+        //     ctx.stroke();
+        // }
+        
+        //drawing out the waveform displaying canvas
+        const canvas = document.getElementById("canvas");
+        c = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        pixelRatio = window.devicePixelRatio;
+        sizeOnScreen = canvas.getBoundingClientRect();
+
+        canvas.width = sizeOnScreen.width * pixelRatio;
+        canvas.height = sizeOnScreen.height * pixelRatio;
+
+        canvas.style.width = canvas.width / pixelRatio + "px";
+        canvas.style.height = canvas.height / pixelRatio + "px";
+        
+        c.fillStyle = "#181818";
+        c.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (x = 0; x <= canvas.width; x += 20) 
+        {
+            for (y = 0; y <= canvas.height; y += 20) 
+            {
+                c.moveTo(x, 0);
+                c.lineTo(x, canvas.height);
+                
+                c.moveTo(0, y);
+                c.lineTo(canvas.width, y);
+                
+                c.strokeStyle = "#8f8f8f";
+                c.stroke();
+            }
+        }
+        
+        //c.strokeStyle = "#8f8f8f";
+        //c.beginPath();
+        //c.moveTo(0, canvas.height / 2);
+        //c.lineTo(canvas.width, canvas.height / 2);
+        //c.stroke();
+
+        // for(var i = 0; i < canvas.height; i = i++)
+        // {
+        //     // //vertical lines
+        //     // c.moveTo(i, canvas.height);
+        //     // c.lineTo(i, 605);
+
+        //     // //horizontal lines
+        //     // c.moveTo(i, canvas.height/2);
+        //     // c.lineTo(canvas.width, canvas.height/2);
+
+        //     // //line style
+        //     // c.strokeStyle = "#8f8f8f";
+        //     // c.stroke();
+        // }
+
+        // var drawGrid = function(w, h, id) 
+        // {
+        //     //var canvas = document.getElementById("canvas");
+        //     //c = canvas.getContext('2d');
+        //     c.canvas.width  = w;
+        //     c.canvas.height = h;
+
+
+        //     for (x = 0; x <= w; x += 20) 
+        //     {
+        //         for (y = 0; y <= h; y += 20) 
+        //         {
+        //             c.moveTo(x, 0);
+        //             c.lineTo(x, h);
+                
+        //             c.moveTo(0, y);
+        //             c.lineTo(w, y);
+                
+        //             c.strokeStyle = "#8f8f8f";
+        //             c.stroke();
+        //         }
+        //     }
+
+        // };
+
+        // drawGrid(window.innerWidth, window.innerHeight, "canvas");
+
+    </script>
+
+</body>
+</html>

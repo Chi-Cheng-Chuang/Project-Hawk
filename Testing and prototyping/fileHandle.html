@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <!-- <input type="file" id="file-selector" multiple> -->
+        <input type="file" onchange="previewFile()" /><br />
+        <p class="content"></p>
+
+        <script>
+            // const fileSelector = document.getElementById('file-selector');
+            // fileSelector.addEventListener('change', (event) => {
+            //     const fileList = event.target.files;
+            //     console.log(fileList);
+            // });
+
+            // function readFile(file) 
+            // {
+            // // Check if the file is an image.
+            // // if (file.type && !file.type.startsWith('image/')) {
+            // //     console.log('File is not an image.', file.type, file);
+            // //     return;
+            // // }
+
+            //     const reader = new FileReader();
+            //     reader.addEventListener('load', (event) => {
+            //         reader.innerText = reader.result;
+            //         //img.src = event.target.result;
+            //     });
+
+            //     //if file exist 
+            //     reader.readAsText(file);
+            // }
+
+            function previewFile() 
+            {
+                const content = document.querySelector(".content");
+                const [file] = document.querySelector("input[type=file]").files;
+                const reader = new FileReader();
+
+                reader.addEventListener(
+                    "load",
+                    () => {
+                    // this will then display a text file
+                    content.innerText = reader.result;
+                    },
+                    false
+                );
+
+                if (file) 
+                {
+                    //read contents of file and display it as text format
+                    reader.readAsText(file);
+
+                    // //tokenize the result with the "," delimitor
+                    // var str = file.result;
+                    // var strTok = str.split(",");
+                    // console.log(strTok);
+                }
+            }
+        </script>
+    </body>
+</html>
