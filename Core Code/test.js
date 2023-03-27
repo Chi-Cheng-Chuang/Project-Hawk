@@ -103,20 +103,24 @@ const draw = () => {
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
   c.strokeStyle = "#414141";
-  const numLines = 50; // changing number of lines makes smaller squares
+  
+  // changing number of lines makes smaller squares
+  const numLines = 40; 
   const lineHeight = canvas.height / numLines;
-  for (let i = 0; i < numLines; i++) 
+  
+  // Draw Horizontal lines
+  for (let i = 0; i < canvas.height; i++) 
   {
-    // Draw Horizontal lines
+    
     c.beginPath();
     c.moveTo(0, i * lineHeight);
     c.lineTo(canvas.width, i * lineHeight);
     c.stroke();
   }
 
-  for(let i = 0; i < numLines; i++)
+  // Draw Vertical lines
+  for(let i = 0; i < canvas.width; i++)  
   {
-    // Draw Vertical lines
     c.beginPath();
     c.moveTo(i * lineHeight, 0);
     c.lineTo(i * lineHeight, canvas.height);
@@ -143,7 +147,6 @@ const draw = () => {
   requestAnimationFrame(draw);
 };
 
-
 const fs = require('fs');
 fs.writeFile('datafile.txt', dataArray.join('\n'), function (err) {
   if (err) throw err;
@@ -164,48 +167,48 @@ mode = false; // true for continuous, false for "run once" mode
 
 var array = [];
 for (let j = 0; j < 100; j++) { // for loop to populate the array to simulate the data block
-    array.push(parseInt(randomBinary(12), 2)); // 12 bit binary value
+  array.push(parseInt(randomBinary(12), 2)); // 12 bit binary value
 }
 
 function FrequencyInputGainTests() { // doesnt work as intended, needs to be redone 
-    // testing gradual increase/decrease for frequency only 
-    var myString = "Freq Tests";
-    var myText = document.getElementById("myText");
-    myText.textContent = myString;
-    sleep(function() {}, 1000); 
+  // testing gradual increase/decrease for frequency only 
+  var myString = "Freq Tests";
+  var myText = document.getElementById("myText");
+  myText.textContent = myString;
+  sleep(function() {}, 1000); 
 
-    // testing gradual increase/decrease for input gain only, frequency remains constant
-    var myString = "Input Gain Tests";
-    var myText = document.getElementById("myText");
-    myText.textContent = myString;
-    sleep(function() {}, 1000); 
+  // testing gradual increase/decrease for input gain only, frequency remains constant
+  var myString = "Input Gain Tests";
+  var myText = document.getElementById("myText");
+  myText.textContent = myString;
+  sleep(function() {}, 1000); 
 
-    // testing gradual increase/decrease for freq and input gain simultaneously
-    var myString = "Input & Freq Tests";
-    var myText = document.getElementById("myText");
-    myText.textContent = myString;
-    sleep(function() {}, 1000); 
+  // testing gradual increase/decrease for freq and input gain simultaneously
+  var myString = "Input & Freq Tests";
+  var myText = document.getElementById("myText");
+  myText.textContent = myString;
+  sleep(function() {}, 1000); 
 
-    // testing inverse increase/decrease for freq and input gain simulatenously
-    var myString = "Input & Freq Inv Tests";
-    var myText = document.getElementById("myText");
-    myText.textContent = myString;
-    sleep(function() {}, 1000); 
+  // testing inverse increase/decrease for freq and input gain simulatenously
+  var myString = "Input & Freq Inv Tests";
+  var myText = document.getElementById("myText");
+  myText.textContent = myString;
+  sleep(function() {}, 1000); 
 
-    // instantaneous change for frequency only
-    var myString = "Freq Instantaneous Tests";
-    var myText = document.getElementById("myText");
-    myText.textContent = myString;
-    sleep(function() {}, 1000); 
+  // instantaneous change for frequency only
+  var myString = "Freq Instantaneous Tests";
+  var myText = document.getElementById("myText");
+  myText.textContent = myString;
+  sleep(function() {}, 1000); 
 
-    // instantaneous change for input gain only
-    var myString = "Gain Instantaneous Tests";
-    var myText = document.getElementById("myText");
-    myText.textContent = myString;
-    sleep(function() {}, 1000); 
+  // instantaneous change for input gain only
+  var myString = "Gain Instantaneous Tests";
+  var myText = document.getElementById("myText");
+  myText.textContent = myString;
+  sleep(function() {}, 1000); 
 
-    // instantaneous change for both frequency and input gain
-    // var myText = document.getElementById("myText");
-    // myText.textContent = myString;
-  }
+  // instantaneous change for both frequency and input gain
+  // var myText = document.getElementById("myText");
+  // myText.textContent = myString;
+}
 

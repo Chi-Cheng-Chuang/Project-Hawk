@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Read CSV</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input type="file" id="uploadfile" accept=".csv">
+        <button id="uploadConfirm">Upload File</button>
+
+        <!-- Create a canvas for displaying graphs later using chart.js -->
+        <canvas id="lineChart" height="400" width="1080" style="position: relative; height:40vh; width:80vw"></canvas>
+        <!-- Loading in the remote url to use chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+        <!-- Loading in the remote url to use papaparse for handling csv files --> 
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+        <script>
+
+          chartIt();                //call chartIt function
+          
+          //****************************** csv file data plotting ******************************//
+          async function chartIt(){
+            await getData(); //wait for getData() function to execute first
+            const CHART = document.getElementById("lineChart");
+            //console.log(CHART);
+            let lineChart = new Chart(CHART, {
+              type: 'line',
+              data: {
+                labels: time_data, //display time variable along the x-axis
+                datasets: [
+                  {
+                    label: 'Signal Output',
+                    data: data_point,
+                    backgroundColor:['rgba(132, 100, 255, 0.2)'],
+                    borderColor:['rgba(132, 100, 255, 1)'],
+                    borderWidth: 0.5
+                  }
+                ]
+              },
+              options: {
+                scales: {
+                    x: {
+                        beginAtZero: false,
+                        // ticks:{
+                        //     callback: function(value, index, values){
+                        //         //return value + 'sec';
+                        //         //setting a maximum sigfig of 2 with a unit
+                        //         // return new Intl.NumberFormat('en-IN',{
+                        //         //     maximumSignificantDigits: 2
+                        //         // }).format(value) + 's' ;
+                        //     }
+                        // }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        ticks:{
+                            callback: function(value, index, values){
+                                //return value + 'V';
+                                //setting a maximum sigfig of 2 with a unit
+                                return new Intl.NumberFormat('en-IN',{
+                                    maximumSignificantDigits: 2
+                                }).format(value) + 'V';
+                            }
+                        }
+                    }
+                }
+              }
+            });
+          }
+
+          // //****************************** csv file handling ******************************//
+          //declare two arrays to store time and sine values
+
+          const time_data = []; //global time variable
+          const data_point = []; //global data variable
+            
+          async function getData(){
+            const uploadConfirm = document.getElementById('uploadConfirm').
+              addEventListener('click', () => {
+              Papa.parse(document.getElementById('uploadfile').files[0],
+              {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results){
+                    //console.log(results); //<===== for testing
+                    //console.log(results.data[0].sine); //<===== for testing
+
+                    time_data.length = 0;     //clear out time array
+                    data_point.length = 0;    //clear out data_point array
+                    //push all values into their own array
+                    for(i = 0; i < results.data.length; i++)
+                    {
+                        
+                        time_data.push(results.data[i].t);     //push time values into time[]
+                        data_point.push(results.data[i].data);  //push sine values into sine[]
+                    }
+                    //console.log(time); //<===== for testing
+                    //console.log(sine); //<===== for testing
+                }
+              });
+            });
+          }
+
+          // console.log(time); //<===== for testing
+          // console.log(sine); //<===== for testing
+
+        </script>
+    </body>
+</html>
