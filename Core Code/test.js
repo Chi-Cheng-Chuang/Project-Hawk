@@ -112,6 +112,10 @@ const draw = () => {
     c.moveTo(0, i * lineHeight);
     c.lineTo(canvas.width, i * lineHeight);
     c.stroke();
+  }
+
+  for(let i = 0; i < numLines; i++)
+  {
     // Draw Vertical lines
     c.beginPath();
     c.moveTo(i * lineHeight, 0);
