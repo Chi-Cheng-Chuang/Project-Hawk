@@ -19,28 +19,6 @@
         <!-- Create a space for displaying graphs later using plotly.js -->
         <div id="chart"></div>
 
-        <script>
-            function rand() {
-                    return Math.random();
-                }
-                
-                Plotly.newPlot('chart', [{
-                    y: [1,2,3].map(rand),
-                    mode: 'lines',
-                    line: {color: '#80CAF6'}
-                }]);
-                
-                var cnt = 0;
-                
-                var interval = setInterval(function() {
-                
-                    Plotly.extendTraces('chart', {
-                    y: [[rand()]]
-                    }, [0])
-                
-                    if(++cnt === 100) clearInterval(interval);
-                }, 300);
-          
-        </script>
+        <script src="plotter.js"></script>
     </body>
 </html>
