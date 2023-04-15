@@ -5,7 +5,7 @@ function rand() {
   Plotly.newPlot('chart', [{
     y: [1,2,3].map(rand),
     mode: 'lines',
-    line: {color: '#FF007F'}
+    line: {color: '#1505AB'}
   }]);
   
   var cnt = 0;
@@ -16,8 +16,8 @@ function rand() {
       y: [[rand()]]
     }, [0])
   
-    if(++cnt === 3200) clearInterval(interval);
-  }, 30);
+    if(++cnt === 32000) clearInterval(interval);
+  }, 1);
 
   //call function plotData() which also calls plotly plotting functions
 
