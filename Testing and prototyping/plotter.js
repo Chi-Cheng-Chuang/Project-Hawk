@@ -1,4 +1,4 @@
-function rand() {
+/*function rand() {
     return Math.random();
   }
   
@@ -17,15 +17,21 @@ function rand() {
     }, [0])
   
     if(++cnt === 32000) clearInterval(interval);
-  }, 1);
+  }, 300);*/
 
   //call function plotData() which also calls plotly plotting functions
 
-  //plotData();
+  //const cors = import("cors");
+/*  var app = cors();
+  app.use(cors({
+    origin: 'https://example.com'
+  }));*/
+
+  plotData();
 
   //****************************** csv file handling ******************************//
   //declare two arrays to store time and sine values
-/*   
+  
   const time_data = []; //global time variable
   const point_data = []; //global data variable
     
@@ -33,7 +39,7 @@ function rand() {
   {
     const uploadConfirm = document.getElementById('uploadConfirm').
       addEventListener('click', () => {
-      Papa.parse(document.getElementById('uploadfile').files[0],
+      Papa.parse('http://localhost:8000/data.csv',
       {
         download: true,
         header: true,
@@ -57,13 +63,13 @@ function rand() {
         }
       });
     });
-  } */
+  } 
   // console.log(time); //<===== for testing
   // console.log(sine); //<===== for testing
 
   //****************************** Plotly.js Graph Control ******************************//
   //data graphing control
-/*   function makePlotly(time_data, point_data)
+   function makePlotly(time_data, point_data)
   {
     myChart = document.getElementById('chart');
     Plotly.newPlot(myChart, data, layout, config);
@@ -123,4 +129,4 @@ function rand() {
       }
     },
   };
- */
+ 
