@@ -1,9 +1,15 @@
-var express = require('express');
-var app = express();
+const fs = require('fs');
+const http = require('http');
 
-app.use(express.static('public'));
+http.createServer((req, res) => {
+  fs.readFile(__dirname + req.url, (err, data) => {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      res.end('404: File not found');
+    } else {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(data);
+    }
+  });
+}).listen(8000);
 
-//Serves all the request which includes /images in the url from Images folder
-app.use('/images', express.static(__dirname + '/Images'));
-
-var server = app.listen(5000);
