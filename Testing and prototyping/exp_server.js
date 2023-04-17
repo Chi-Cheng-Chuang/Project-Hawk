@@ -1,10 +1,10 @@
 var express = require('express');
 var app = express();
 
-const cors = require("cors");
+/*const cors = require("cors");
 app.use(cors({
-    origin: 'http://localhost:8000/'
-}));
+    origin: 'null'
+}));*/
 
 app.use(express.static('.'));
 

@@ -4,6 +4,14 @@
         <title>SimpleScope</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!--script type='text/javascript' charset='UTF-8'>
+                window['adrum-config'] = (function(config) { 
+                    config.geo = {
+                        localIP: "http://localhost:8000/", 
+                    };
+                    return config;
+                })(window['adrum-config'] || {});   
+        </script-->
     </head>
     <body>
         <!-- Choose file and upload file button control -->
@@ -11,7 +19,7 @@
         <button id="uploadConfirm">Arm</button>
 
         <!-- Loading in the remote url to use plotly.js -->
-        <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
         <!-- Loading in the remote url to use papaparse for handling csv files --> 
         <script src="./node_modules/papaparse/papaparse.js"></script>
@@ -19,12 +27,6 @@
         
         <!-- Create a space for displaying graphs later using plotly.js -->
         <div id="chart"></div>
-
-        <httpProtocol>
-            <customHeaders>
-                Header set Access-Control-Allow-Origin "http://localhost:8000/  "
-            </customHeaders>
-        </httpProtocol>
 
         <script src="plotter.js"></script>
     </body>
