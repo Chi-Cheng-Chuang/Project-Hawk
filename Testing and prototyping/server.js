@@ -1,15 +1,21 @@
-const fs = require('fs');
-const http = require('http');
+const PORT = 8000;
 
-http.createServer((req, res) => {
-  fs.readFile(__dirname + req.url, (err, data) => {
-    if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/html' });
-      res.end('404: File not found');
-    } else {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(data);
-    }
-  });
-}).listen(8000);
+var express = require('express');
+var app = express();
 
+const cors = require("cors");
+app.use(cors({
+    origin: 'http://localhost:5000/'
+}));
+
+app.use(express.static('.'));
+
+//app.use('.', express.static(__dirname + '.'));
+
+app.get('.', function(req, res) {
+    res.sendFile(path.join(public, '.'));
+});
+
+var server = app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
+
+//console.log('Listening on port 80');

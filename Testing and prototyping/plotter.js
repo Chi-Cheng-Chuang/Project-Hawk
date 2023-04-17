@@ -27,6 +27,27 @@
     origin: 'https://example.com'
   }));*/
 
+  function upload() {
+      var method = "POST";
+      var url = "http://127.0.0.1:9000/push";
+
+      var xhr = new XMLHttpRequest();
+
+      xhr.open(method, url);
+
+      xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+      xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+
+      var text = {"command":"PUSH"};
+      xhr.send(text);
+
+  }
+
+  $(document).ready(function(){
+  $('.upload').click(upload);
+  });
+
+  //XMLHttpRequest.setRequestHeader(header, 'http://localhost:5000/');
   plotData();
 
   //****************************** csv file handling ******************************//
