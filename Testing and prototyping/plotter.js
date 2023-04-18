@@ -19,35 +19,8 @@
     if(++cnt === 32000) clearInterval(interval);
   }, 300);*/
 
-  //call function plotData() which also calls plotly plotting functions
+  //call function plotData() which also calls plotly plotting functions\
 
-  //const cors = import("cors");
-/*  var app = cors();
-  app.use(cors({
-    origin: 'https://example.com'
-  }));*/
-
-  function upload() {
-      var method = "POST";
-      var url = "http://127.0.0.1:9000/push";
-
-      var xhr = new XMLHttpRequest();
-
-      xhr.open(method, url);
-
-      xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-      xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-
-      var text = {"command":"PUSH"};
-      xhr.send(text);
-
-  }
-
-  $(document).ready(function(){
-  $('.upload').click(upload);
-  });
-
-  //XMLHttpRequest.setRequestHeader(header, 'http://localhost:5000/');
   plotData();
 
   //****************************** csv file handling ******************************//

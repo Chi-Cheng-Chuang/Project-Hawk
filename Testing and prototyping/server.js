@@ -5,7 +5,7 @@ var app = express();
 
 const cors = require("cors");
 app.use(cors({
-    origin: 'http://localhost:5000/'
+    origin: 'null'
 }));
 
 app.use(express.static('.'));
