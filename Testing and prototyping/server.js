@@ -6,7 +6,7 @@ const path = require('path');
 const PORT1 = 8000;
 const PORT2 = 9000;
 
-
+//establishes localhost:8000 => serves files in root directory to browser
 http.createServer(function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'null');
   console.log(`${req.method} ${req.url}`);
@@ -41,9 +41,6 @@ http.createServer(function (req, res) {
       return;
     }
 
-    // if is a directory search for index file matching the extension
-    if (fs.statSync(pathname).isDirectory()) pathname += '/index' + ext;
-
     // read file from file system
     fs.readFile(pathname, function(err, data){
       if(err){
@@ -60,6 +57,7 @@ http.createServer(function (req, res) {
 
 }).listen(parseInt(PORT1));
 
+//establishes localhost:9000 => removes files from root directory upon request from browser
 http.createServer(function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'null');
   console.log(`${req.method} ${req.url}`);
@@ -97,18 +95,11 @@ http.createServer(function (req, res) {
       }
     }
 
-    // if is a directory search for index file matching the extension
-    if (fs.statSync(pathname).isDirectory()) pathname += '/index' + ext;
-
-    // read file from file system
-    fs.readFile(pathname, function(err, data){
-      if(err){
-        res.statusCode = 500;
-        res.end(`Error getting the file: ${err}.`);
-      } else {
-        // if the file is found, set Content-type and send data
-        res.setHeader('Content-type', map[ext] || 'text/plain' );
-        res.end(data);
+    fs.exists(pathname, function (exist) {
+    if(!exist) {
+      // if the file is not found, return 404
+      res.statusCode = 404;
+      res.end(`File ${pathname} not found!`);
       }
     });
   });

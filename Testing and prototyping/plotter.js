@@ -1,37 +1,31 @@
-/*function rand() {
-    return Math.random();
-  }
-  
-  Plotly.newPlot('chart', [{
-    y: [1,2,3].map(rand),
-    mode: 'lines',
-    line: {color: '#1505AB'}
-  }]);
-  
-  var cnt = 0;
-  
-  var interval = setInterval(function() {
-  
-    Plotly.extendTraces('chart', {
-      y: [[rand()]]
-    }, [0])
-  
-    if(++cnt === 32000) clearInterval(interval);
-  }, 300);*/
 
-  //call function plotData() which also calls plotly plotting functions\
-
-  plotData();
+  armProgram();
 
   //****************************** csv file handling ******************************//
   //declare two arrays to store time and sine values
   
   const time_data = []; //global time variable
   const point_data = []; //global data variable
+  var dataFile;
+
+  makePlotly(time_data, point_data);
     
-  async function plotData()
+  async function armProgram()
   {
-    const uploadConfirm = document.getElementById('uploadConfirm').
+    //resets canvas
+    const reset = document.getElementById('reset').
+      addEventListener('click', () => {
+        
+        //calls localhost:9000 to remove data.csv from root directory
+        //fetch('http://localhost:9000/data.csv');
+
+        time_data.length = 0; //global time variable
+        point_data.length = 0; //global data variable
+        makePlotly(time_data, point_data);
+    });
+
+    //calls localhost:8000 to load data.csv, parses file, draws canvas
+    const upload = document.getElementById('arm').
       addEventListener('click', () => {
       Papa.parse('http://localhost:8000/data.csv',
       {
@@ -74,6 +68,13 @@
     // }]);
   }
 
+/*  async function getData(){
+    if('http://localhost:8000/data.csv'.exists()){
+      let dataFile = await fetch('http://localhost:8000/data.csv');
+      return;
+    }else getData();
+  }
+*/
   //automatically resize to fit device's window size
   var config = {responsive: true}
 
