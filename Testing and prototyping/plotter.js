@@ -27,6 +27,12 @@
     //calls localhost:8000 to load data.csv, parses file, draws canvas
     const upload = document.getElementById('arm').
       addEventListener('click', () => {
+
+      fetch('http://localhost:9000/data.csv');
+      time_data.length = 0; //global time variable
+      point_data.length = 0; //global data variable
+      makePlotly(time_data, point_data);
+
       Papa.parse('http://localhost:8000/data.csv',
       {
         download: true,
@@ -95,7 +101,7 @@
     // width: 1500,
     // height: 680,
     title:{
-      text: 'Signal Input', //chart title
+      text: 'Input Signal', //chart title
       font:{
         family: 'Arial',    //title's font type
         size: 25            //title's font size
@@ -105,7 +111,7 @@
     xaxis:{
       //automargin: true,
       title:{
-        text: 'time (sec)', //chart title
+        text: 'Time', //chart title
         font:{
           family: 'Arial',    //title's font type
           size: 20            //title's font size
@@ -116,7 +122,7 @@
     yaxis:{
       //automargin: true,
       title:{
-        text: 'Volt', //chart title
+        text: 'Amplitude (V)', //chart title
         font:{
           family: 'Arial',    //title's font type
           size: 20            //title's font size

@@ -1,4 +1,5 @@
 const http = require('http');
+const { waitFile }= require('wait-file');
 const url = require('url');
 const fs = require('fs');
 const cors = require("cors");
@@ -33,14 +34,25 @@ http.createServer(function (req, res) {
     '.doc': 'application/msword'
   };
 
-  fs.exists(pathname, function (exist) {
-    if(!exist) {
+  const opts = {
+    resources: [pathname],
+    delay: 0, // initial delay in ms, default 0ms
+    interval: 25, // poll interval in ms, default 250ms
+    log: false, // outputs to stdout, remaining resources waited on and when complete or errored, default false
+    reverse: false, // resources being NOT available, default false
+    //timeout: 30000, // timeout in ms, default Infinity
+    verbose: false, // optional flag which outputs debug output, default false
+    window: 1000, // stabilization time in ms, default 750ms
+  };
+
+  fs.exists(pathname, async function (exist) {
+/*    if(!exist) {
       // if the file is not found, return 404
       res.statusCode = 404;
       res.end(`File ${pathname} not found!`);
       return;
-    }
-
+    }*/
+/*
     // read file from file system
     fs.readFile(pathname, function(err, data){
       if(err){
@@ -51,7 +63,24 @@ http.createServer(function (req, res) {
         res.setHeader('Content-type', map[ext] || 'text/plain' );
         res.end(data);
       }
-    });
+    });*/
+
+    try {
+      await waitFile(opts);
+      // once here, all resources are available
+      fs.readFile(pathname, function(err, data){
+        if(err){
+          res.statusCode = 500;
+          res.end(`Error getting the file: ${err}.`);
+        } else {
+          // if the file is found, set Content-type and send data
+          res.setHeader('Content-type', map[ext] || 'text/plain' );
+          res.end(data);
+        }
+      });
+      } catch (err) {
+        console.error(err);
+      }
   });
 
 
